@@ -30,9 +30,6 @@ module.exports = function (options) {
 		 * @param  {String|Array} folder Folder to watch when registering a watch task
 		 */
 		addTask: function (type, tasks, folder) {
-			console.log(type);
-			console.log(tasks);
-
 			if ( !type ) {
 				throw Error('Error registering task: Please specify a task type (default, deploy or watch).');
 				return;
@@ -74,8 +71,6 @@ module.exports = function (options) {
 
 		getTasks: function (type) {
 			var taskList = allTasks[type];
-
-			console.log(taskList);
 
 			if ( taskList ) {
 				return taskList;
