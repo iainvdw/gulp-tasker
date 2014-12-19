@@ -17,9 +17,11 @@ module.exports = function (options) {
 
 	options = extend(true, defaults, options);
 
-	requireDir(process.cwd() + options.path, {recurse: options.recurse});
-
 	return {
+		loadTasks: function () {
+			requireDir(process.cwd() + options.path, {recurse: options.recurse});
+		},
+
 		/**
 		 * Register helper to let subtasks register themselves in the 'default' gulp task
 		 *
