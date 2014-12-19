@@ -17,7 +17,7 @@ module.exports = function (options) {
 
 	options = extend(true, defaults, options);
 
-	requireDir(options.tasks, {recurse: options.recurse});
+	requireDir(options.path, {recurse: options.recurse});
 
 	return {
 		/**
@@ -30,7 +30,7 @@ module.exports = function (options) {
 		addTask: function (type, tasks, folder) {
 			console.log(type);
 			console.log(tasks);
-			
+
 			if ( !type ) {
 				throw Error('Error registering task: Please specify a task type (default, deploy or watch).');
 				return;
