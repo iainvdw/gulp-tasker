@@ -1,0 +1,28 @@
+{
+  "name": "gulp-tasker",
+  "version": "0.1.5",
+  "description": "Gulp task loader and task registration manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iainvdw/gulp-tasker"
+  },
+  "keywords": [
+    "task",
+    "loader",
+    "gulpplugin"
+  ],
+  "author": "Iain van der Wiel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iainvdw/gulp-tasker/issues"
+  },
+  "homepage": "https://github.com/iainvdw/gulp-tasker",
+  "dependencies": {
+    "extend": "^2.0.0",
+    "require-dir": "^0.1.0"
+  }
+}
