@@ -17,7 +17,7 @@ module.exports = function (options) {
 
 	options = extend(true, defaults, options);
 
-	requireDir(options.path, {recurse: options.recurse});
+	requireDir(process.cwd() + options.path, {recurse: options.recurse});
 
 	return {
 		/**
