@@ -1,6 +1,6 @@
 {
   "name": "gulp-tasker",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Gulp task loader and task registration manager",
   "main": "index.js",
   "scripts": {
