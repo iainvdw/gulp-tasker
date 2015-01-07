@@ -6,14 +6,19 @@ The idea behind gulp-tasker is that you are able to create independent, small su
 
 With gulp-tasker, each task (or bundle of related tasks for that matter) can be specified in a task folder. Each task folder would then contain .js file(s) that specify the tasks to be loaded. Also, you can register sub-tasks to 'global' tasks, such as the 'default' or 'watch' tasks.
 
+## Installation
+Install with npm: 
+
+```npm install gulp-tasker```
+
 ## Usage
-### Task loading
 In your gulpfile.js, first expose gulp-tasker globally so gulp-tasker is also available in the scope of your sub-tasks:
 
 ```javascript
 global.tasker = require('gulp-tasker');
 ```
 
+### Task loading
 Then, to load tasks from a folder, run the `tasker.loadTasks(options)` command:
 
 ```javascript
