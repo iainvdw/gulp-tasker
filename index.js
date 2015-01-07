@@ -1,82 +1,80 @@
 /* Gulp task loader and registration manager */
 
-module.exports = function (options) {
+module.exports = (function () {
 	'use strict';
 	
 	var requireDir = require('require-dir'),
 		extend = require('extend'),
-		allTasks = {
-			default: [],
-			deploy: [],
-			watch: []
-		},
+		allTasks = {},
 		defaults = {
 			path: 'gulp-tasks',
 			recurse: true
 		};
 
-	options = extend(true, defaults, options);
-
 	return {
-		loadTasks: function () {
+		/**
+		 * Load all tasks from the `path` option
+		 */
+		loadTasks: function (opts) {
+			var options = extend(true, defaults, opts);
+
+			console.log(process.cwd() + options.path);
 			requireDir(process.cwd() + options.path, {recurse: options.recurse});
 		},
 
 		/**
 		 * Register helper to let subtasks register themselves in the 'default' gulp task
 		 *
-		 * @param  {String} type Type of task to register ('default', 'deploy' or 'watch' task)
-		 * @param  {String|Array} tasks Task name to register in 'default' task
-		 * @param  {String|Array} folder Folder to watch when registering a watch task
+		 * @param  {String} 		type 	Type of task to register
+		 * @param  {String|Array} 	tasks 	Task name to register in 'default' task
+		 * @param  {String|Array} 	folder 	Folder(s) to watch when registering a watch task
 		 */
 		addTask: function (type, tasks, folder) {
 			if ( !type ) {
-				throw Error('Error registering task: Please specify a task type (default, deploy or watch).');
-				return;
+				throw Error('Error registering task: Please specify a task type');
 			}
 
 			if ( !tasks ) {
 				throw Error('Error registering task: Please specify at least one task.');
-				return;
 			}
 
-			switch (type) {
-				case 'default':
-					allTasks.default = allTasks.default.concat(tasks);
-					break;
-				case 'deploy':
-					allTasks.deploy = allTasks.deploy.concat(tasks);
-					break;
-				case 'watch':
-					if ( !folder ) {
-						throw Error('Error registering watch task: Please specify a folder to watch.');
-						return;
-					}
+			allTasks[type] = allTasks[type] || {tasks: [], requireFolders: !!folder};
 
-					if ( !(tasks.constructor === Array) ) {
-						tasks = [tasks];
-					}
+			if ( !folder && allTasks[type].requireFolders) {
+				throw Error('Error registering watch type task: Please specify (a) folder(s) to watch.');
+			}
 
-					allTasks.watch = allTasks.watch.concat({
-						tasks: tasks,
-						folders: folder
-					});
+			if ( !!folder ) { // Folder specified, tasks is a watch task
 
-					break;
-				default:
-					throw Error('Error: Incorrect task type specified.');
-					break;
+				// Convert argument to array if it's no array yet
+				if ( !(tasks.constructor === Array) ) {
+					tasks = [tasks];
+				}
+
+				allTasks[type].tasks = allTasks[type].tasks.concat({
+					tasks: tasks,
+					folders: folder
+				});
+
+			} else { // Regular tasks
+				allTasks[type].tasks = allTasks[type].tasks.concat(tasks);
 			}
 		},
 
+		/**
+		 * Returns registered tasks of specified type
+		 * 
+		 * @param  {String} type Task list to get
+		 * @return {Array}      Array with tasks
+		 */
 		getTasks: function (type) {
 			var taskList = allTasks[type];
 
 			if ( taskList ) {
 				return taskList;
 			} else {
-				throw Error('No task list of type ' + type + ' are specfied');
+				throw Error('No task list of type ' + type + ' is specfied');
 			}
 		}
 	}
-};
+}());
