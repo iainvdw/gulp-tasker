@@ -63,7 +63,7 @@ Watch tasks are an object of two properties, the task name and the folder to wat
 method 								| description
 :----- 								| :----------
 tasker.loadTasks(options) 			| Load all tasks from a folder<br>**options** (Object): options object containing `path` and `recurse` options.<br>**options.path** (String, default `'gulp-tasks'`): path to load tasks from<br>**options.recurse** (Boolean, default `true`): Whether to recursively load all folders within the specified path
-tasker.addTask(type, task folder)	| Register a task to a different task. Optional: specify a folder to register the task as a watch task<br>**type** (String): task to register new task to<br>**task** (String\|Array): task to register<br>**folder** (String\|Array, optional): folder to watch for changes
+tasker.addTask(type, task, folder)	| Register a task to a different task. Optional: specify a folder to register the task as a watch task<br>**type** (String): task to register new task to<br>**task** (String\|Array): task to register<br>**folder** (String\|Array, optional): folder to watch for changes
 tasker.getTasks(type) 				| Get all tasks of a type<br>**type** (String): Task type to get from gulp-tasker. Corresponds with type specified via addTask()
 
 ## License
