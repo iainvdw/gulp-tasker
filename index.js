@@ -18,7 +18,6 @@ module.exports = (function () {
 		loadTasks: function (opts) {
 			var options = extend(true, defaults, opts);
 
-			console.log(process.cwd() + options.path);
 			requireDir(process.cwd() + options.path, {recurse: options.recurse});
 		},
 
