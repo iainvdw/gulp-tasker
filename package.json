@@ -23,6 +23,6 @@
   "homepage": "https://github.com/iainvdw/gulp-tasker",
   "dependencies": {
     "extend": "^2.0.0",
-    "require-dir": "^0.1.0"
+    "require-dir": "^0.3.1"
   }
 }
